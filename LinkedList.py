@@ -98,7 +98,11 @@ class LinkedList:
             curr.next = l2
         return dummy.next
 
-    def sortList(self, head):
+    def sortList(self): 
+        if self.head:
+            self._sortList(self.head)
+    
+    def _sortList(self, head):
         #base case
         if not head or not head.next:
             return head
@@ -109,13 +113,17 @@ class LinkedList:
         middle.next = None
         middle = temp
         #now we wanna recurse to break each node to individual nodes from left to right
-        left = self.sortList(head)
-        right = self.sortList(middle)
+        left = self._sortList(head)
+        right = self._sortList(middle)
         #now we need to merge the two left and right nodes using another helper function
         sortedList = self.merge(left,right)
         return sortedList
 
-    def mergeTwoLists(self, h1,h2):
+    def mergeTwoLists(self,l2):
+        if self.head and self.head and l2 and l2.next:
+            self._mergeTwoLists(self.head,l2)
+        
+    def _mergeTwoLists(self, h1,h2):
         dummy = ListNode()
         if not h1 and h2:
             return h2
@@ -123,13 +131,16 @@ class LinkedList:
             return h1
         if not h1 and not h2:
             return
-        l1 = self.sortList(h1)
-        l2 = self.sortList(h2)
+        l1 = self._sortList(h1)
+        l2 = self._sortList(h2)
         dummy.next = self.merge(l1.next,l2.next)
         return dummy.next
 
-
-    def reverseList(self,h):
+    def reverseList(self):
+        if self.head and self.head.next:
+            self.head.next = self._reverseList(self.head.next)
+            return self.head
+    def _reverseList(self,h):
         if not h:
             return h
         curr = h
@@ -149,7 +160,7 @@ class LinkedList:
         left = self.head.next    
         middle = self.getMid(self.head.next)
         temp = middle.next
-        right = self.reverseList(temp)
+        right = self._reverseList(temp)
         while (right != None):
             if left.data != right.data:
                 return False
