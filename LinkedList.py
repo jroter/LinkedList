@@ -1,3 +1,4 @@
+import copy
 class ListNode:
     def __init__(self, data=0, next=None):
         self.data = data
@@ -153,12 +154,17 @@ class LinkedList:
             curr = next
         return prev
     
-    #function to determine if linked list is a palindrome
     def isPalindrome(self):
-        if not self.head.next:
+        if self.head:
+            return self._isPalindrome(self.head)
+    #function to determine if linked list is a palindrome
+    def _isPalindrome(self, node):
+        #Deep copy welcome back my old friend
+        cur_node = copy.deepcopy(node)
+        if not cur_node.next:
             return True
-        left = self.head.next    
-        middle = self.getMid(self.head.next)
+        left = cur_node.next    
+        middle = self.getMid(cur_node.next)
         temp = middle.next
         right = self._reverseList(temp)
         while (right != None):

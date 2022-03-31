@@ -60,3 +60,8 @@ drakes_list.printList()
 drakes_list.rotate(2)
 print("updated: ")
 drakes_list.printList()
+if drakes_list.isPalindrome():
+    print("True")
+else:
+    print("False")
+drakes_list.printList()
